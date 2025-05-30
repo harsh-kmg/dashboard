@@ -306,12 +306,8 @@ def get_final_data(file, PARENT_DF='kunmings.db'):
     file: Streamlit uploaded file object
     """
     df = poplutate_monthly_stock_sheet(file)
-    try:
-        parent_df = load_data(PARENT_DF)
-        master_df = pd.concat([df, parent_df], ignore_index=True, axis=0)
-    except:
-        # If database doesn't exist yet, use only the new data
-        master_df = df
+    parent_df = load_data(PARENT_DF)
+    master_df = pd.concat([df, parent_df], ignore_index=True, axis=0)
     save_data(master_df)
     return master_df
 
